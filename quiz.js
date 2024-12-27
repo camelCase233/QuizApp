@@ -4,6 +4,7 @@ let quest = document.querySelector(".question");
 let counter = 0;
 const buttonsArray = Array.from(options);
 let points = 0;
+let currentIndex = 0;
 document.querySelector(".answers").addEventListener("click", e=>
 {
     if(e.target.classList.contains("btn")){
@@ -30,13 +31,11 @@ next.addEventListener("click", () =>
     options.forEach(option =>
     { if(option.id){option.removeAttribute('id');}}
     )
-    if(counter === 1){
-        assign(sequence[0]);
+    if(currentIndex<sequence.length){
+        assign(sequence[currentIndex]);
+        currentIndex++;
     }
-    else if(counter === 2){
-        assign(sequence[1]);
-    }
-    else if(counter === 3)
+    else
     {
         options.forEach(option =>
         {changeAbililty(options).remove();
@@ -60,28 +59,7 @@ function assign(obj)
     options.forEach((option, index) => {
         option.textContent = Opinion[index];
     });
-}
-// function disableButtons(buttons){
-//     buttons.forEach(button =>
-//     {
-//         button.disabled = true;
-//     }
-//     )
-// }
-// function enableButtons(buttons){
-//     buttons.forEach(button =>
-//     {
-//         button.disabled = false;
-//     }
-//     )
-// }
-// if(counter === 1){
-//     assign(sequence[0]);
-// }
-// else if(counter === 2){
-//     assign(sequence[1]); This code will be executed before the event listener itself, so it won't work here, it has to be inside the
-//event listener
-// }
+}  
 function changeAbililty(buttons)
 {
    return {
